@@ -34,9 +34,5 @@ An open-source, unified, community-driven platform designed to empower college c
 *   **Moderation:**  Maintaining a respectful and productive online environment.
 *   **Scalability:**  Designing the platform to handle a growing user base and volume of content.
 
-## License
-
-[Choose a license, e.g., AGPL-3.0]
-
 ## Project Status
 In Development
