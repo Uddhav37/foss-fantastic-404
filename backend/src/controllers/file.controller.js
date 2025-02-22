@@ -8,12 +8,8 @@ mongoose.connect("mongodb+srv://vermakumar527:ZBpoGaimEANZ60tT@cluster0.2xlqy.mo
 
 export const upload = async (req, res) => {
     const {courseCode,subject} = req.body;
-
-    // console.log(req.file.originalname);
-    // console.log(req.file.buffer);
-    // console.log(req.file.mimetype);
     try {
-        const courseCode = req.body.courseCode; //from axios post request
+        const courseCode = toString(req.body.courseCode); //from axios post request
     
         const newFile = new File({
           name: req.file.originalname,
@@ -21,7 +17,6 @@ export const upload = async (req, res) => {
           contentType: req.file.mimetype,
           courseCode
         });
-        console.log(newFile);
         await newFile.save();
         res.status(201).send('File uploaded successfully!');
     }catch(err){
@@ -29,3 +24,18 @@ export const upload = async (req, res) => {
     }
 };
 
+//returns some information about the files with given courseCode
+//to be used as state in react component
+export const showFile = async(req, res) => {
+    try{
+        const courseCode = req.params.courseCode;
+        const files = await File.find({courseCode});
+        res.json(files.map(file => ({
+            id: file._id,
+            name: file.name,
+            courseCode: file.courseCode,
+        })));
+    }catch(err){
+        res.status(500).send("Error fetching files: " + err.message);
+    }
+}
