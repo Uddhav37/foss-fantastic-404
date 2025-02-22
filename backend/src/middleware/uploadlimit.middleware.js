@@ -1,8 +1,7 @@
+
+
 import multer from 'multer';
 
+// Configure Multer (In-memory storage for MongoDB)
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-export const uploadLimit = (req, res, next) => {
-    upload.single('file');
-}
+export const uploadLimit = multer({ storage }).single('file');
