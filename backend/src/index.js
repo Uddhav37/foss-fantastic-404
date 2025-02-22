@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 
 
 import authRoutes from "./routes/auth.route.js";
-import fileRoutes from "./routes/upload.route.js";
+import fileRoutes from "./routes/file.route.js";
 import { connectDB } from "./lib/db.js";
 
 

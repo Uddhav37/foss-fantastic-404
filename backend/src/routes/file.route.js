@@ -6,6 +6,6 @@ import { protectRoute } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.post("/notes/upload", uploadLimit, upload)
-router.get("/notes/:courseCode", showFile);
+router.get("/notes/tags/:courseCode", showFile);
 
 export default router;
