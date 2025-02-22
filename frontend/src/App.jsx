@@ -1,3 +1,4 @@
+
 // src/App.jsx
 import { Routes, Route } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Box>
+
     </>
   );
 }
