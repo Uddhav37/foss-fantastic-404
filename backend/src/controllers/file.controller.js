@@ -26,7 +26,7 @@ export const upload = async (req, res) => {
 
 //returns some information about the files with given courseCode
 //to be used as state in react component
-export const showFile = async(req, res) => {
+export const getTagFiles = async(req, res) => {
     try{
         const courseCode = req.params.courseCode;
         const files = await File.find({courseCode});
@@ -37,5 +37,22 @@ export const showFile = async(req, res) => {
         })));
     }catch(err){
         res.status(500).send("Error fetching files: " + err.message);
+    }
+}
+
+//view a pdf file, file is fetched from database using id
+export const showFileById = async (req, res) => {
+    try{
+        const id = req.params.id;
+        console.log(id);
+        const resFile = await File.findById(id);
+        if(!resFile){
+            return res.status(404).send("File not found!");
+        }
+
+        res.contentType('application/pdf');
+        res.send(resFile.data);   //sending the pdf
+    }catch(err){
+        res.status(500).send("Error fetching the file: " + err.message);
     }
 }
