@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs"
 export const signup = async (req,res)=>{
 
   const{fullName,email,password} = req.body
+  console.log(req.body);
   try{
     //hasing the password
     if(!fullName || !email || !password){
