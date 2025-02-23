@@ -11,47 +11,26 @@ import {
   } from '@chakra-ui/react';
   import { useState } from 'react';
   import { useNavigate } from 'react-router-dom';
-  import { useAuth } from '../store/authContextProvider'; // Import useAuth
-
-
   
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const toast = useToast();
-  const navigate = useNavigate();
-  const { login,authUser } = useAuth(); // Get login function from context
-
-  const handleSubmit = async (e) => {
+  const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const toast = useToast();
+    const navigate = useNavigate();
+  
+    const handleSubmit = async (e) => {
       e.preventDefault();
-
-      try {
-          const response=await login(email, password);
-          console.log("ye mera area hai",response)
-
-          if (response) {
-              toast({
-                  title: 'Login Successful',
-                  description: "Welcome back!",
-                  status: 'success',
-                  duration: 5000,
-                  isClosable: true,
-              });
-              navigate('/'); // Redirect to dashboard on success
-          } else {
-              throw new Error(!response && 'Invalid credentials');
-          }
-      } catch (error) {
-        console.log("the error is this error",error.message);
-          toast({
-              title: 'Login Failed',
-              description: error.message,
-              status: 'error',
-              duration: 5000,
-              isClosable: true,
-          });
-      }
-  };
+      // Implement your authentication logic here
+      // For demonstration, we'll assume a successful login
+      toast({
+        title: 'Login successful.',
+        description: "You've successfully logged in.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      navigate('/dashboard');
+    };
   
     return (
       <VStack spacing={8} mt={10}>
