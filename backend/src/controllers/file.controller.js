@@ -7,15 +7,14 @@ mongoose.connect("mongodb+srv://vermakumar527:ZBpoGaimEANZ60tT@cluster0.2xlqy.mo
 
 
 export const upload = async (req, res) => {
-    const {courseCode,subject} = req.body;
-    try {
-        const courseCode = toString(req.body.courseCode); //from axios post request
-    
+    try {;
         const newFile = new File({
           name: req.file.originalname,
           data: req.file.buffer,
           contentType: req.file.mimetype,
-          courseCode
+          subjectName: req.body.courseCode,   //from axios post request
+          courseCode: req.body.subjectName,
+          universityName: req.body.universityName
         });
         await newFile.save();
         res.status(201).send('File uploaded successfully!');
