@@ -1,7 +1,4 @@
-// 
-
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
 import { Box, Spinner, Center } from "@chakra-ui/react";
 
 import Navbar from "./components/Navbar";
@@ -14,11 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider, useAuth } from "./store/authContextProvider";
 
 function AppContent() {
-  const { authUser, checkAuth, isCheckingAuth } = useAuth(); // Added `isCheckingAuth`
-
-  useEffect(() => {
-    checkAuth(); // Always check auth on mount
-  }, []);
+  const { authUser, isCheckingAuth } = useAuth(); // No need to call `checkAuth()`
 
   // Show a loading spinner while checking authentication
   if (isCheckingAuth) {

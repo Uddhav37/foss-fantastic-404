@@ -18,11 +18,18 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     setIsCheckingAuth(true);
     try {
-      const res = await axiosInstance.get("auth/check");
-      setAuthUser(res.data);
+      const userData = localStorage.getItem("authUser"); // Retrieve from localStorage
+      if (userData) {
+        setAuthUser(JSON.parse(userData)); // Parse and set authUser
+      } else {
+        const res = await axiosInstance.get("auth/check");
+        setAuthUser(res.data);
+        localStorage.setItem("authUser", JSON.stringify(res.data)); // Store in localStorage
+      }
     } catch (error) {
       console.error("Error in checkAuth:", error.message);
       setAuthUser(null);
+      localStorage.removeItem("authUser"); // Clear storage on error
     } finally {
       setIsCheckingAuth(false);
     }
@@ -34,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await axiosInstance.post("auth/signup", { fullName, email, password });
       setAuthUser(res.data);
+      localStorage.setItem("authUser", JSON.stringify(res.data)); // Store user data
     } catch (error) {
       console.error("Signup failed:", error.message);
       throw error;
@@ -48,7 +56,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await axiosInstance.post("auth/login", { email, password });
       setAuthUser(res.data);
-      return res.data
+      localStorage.setItem("authUser", JSON.stringify(res.data)); // Store user data
+      return res.data;
     } catch (error) {
       console.error("Login failed:", error.message);
       throw error;
@@ -62,6 +71,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await axiosInstance.post("auth/logout");
       setAuthUser(null);
+      localStorage.removeItem("authUser"); // Clear user data
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
