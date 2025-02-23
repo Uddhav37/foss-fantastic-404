@@ -1,4 +1,3 @@
-
 import { Box, Heading, Text, VStack, Flex } from '@chakra-ui/react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
