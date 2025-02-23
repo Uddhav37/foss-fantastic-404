@@ -226,11 +226,27 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    console.log("User attempting to log out:", req.user);
 
-    // Update the chatUser status to offline
+    res.cookie("jwt", "", { maxAge: 0, httpOnly: true });
+
     if (req.user && req.user.fullName) {
-      await ChatUser.findOneAndUpdate({ username: req.user.fullName }, { online: false });
+      // Fix: Use `username` instead of `fullName`
+      const updatedChatUser = await ChatUser.findOneAndUpdate(
+        { username: req.user.fullName }, // Use `username` instead
+        { online: false }, // Set online status to false
+        { new: true }
+      );
+
+      if (!updatedChatUser) {
+        console.error("ChatUser not found or update failed");
+        return res.status(404).json({ message: "ChatUser not found" });
+      }
+
+      console.log("ChatUser status updated successfully:", updatedChatUser);
+    } else {
+      console.error("req.user.fullName is not defined");
+      return res.status(401).json({ message: "Unauthorized: User not found" });
     }
 
     res.status(200).json({ message: "Logged out successfully" });
@@ -239,6 +255,9 @@ export const logout = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
+
 
 export const updateProfile = async (req, res) => {
   try {
