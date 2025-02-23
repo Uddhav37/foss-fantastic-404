@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+/* Custom Calendar Container */
+.custom-calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background: rgba(240, 240, 240, 0.9);
+    /* Light gray for contrast */
+    border-radius: 12px;
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+/* Calendar Box */
+.custom-calendar {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 12px;
+    padding: 15px;
+    background: rgba(250, 250, 250, 0.95);
+    /* Slightly off-white */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Calendar General Styles */
+.react-calendar {
+    border: none !important;
+    border-radius: 12px;
+    padding: 12px;
+    background: transparent;
+}
+
+/* Month View */
+.react-calendar__month-view {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.react-calendar__month-view__weekdays {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #1976d2;
+}
+
+/* Calendar Tiles */
+.react-calendar__tile {
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+/* Hover Effect */
+.react-calendar__tile:enabled:hover {
+    background: #64b5f6;
+    color: white;
+    transform: scale(1.08);
+}
+
+/* Selected Date */
+.react-calendar__tile--active {
+    background: #1976d2;
+    color: white;
+    border-radius: 8px;
+    transform: scale(1.05);
+}
+
+/* Calendar Navigation Buttons */
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.react-calendar__navigation button {
+    background: transparent;
+    border: none;
+    color: #1976d2;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.react-calendar__navigation button:hover {
+    color: #0d47a1;
+    transform: scale(1.1);
+}
+
+/* Calendar Header */
+.react-calendar__navigation__label {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #0d47a1;
+}
+
+/* Highlight Current Date (Rounded-Square instead of Circle) */
+.custom-calendar .react-calendar__tile--now {
+    background: #ff6b6b !important;
+    color: white !important;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(100, 100, 100, 0.3);
+    /* Subtle gray outline */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    /* Depth effect */
+    transform: scale(1.05);
+}
+
+/* Hover Effect for the Current Day */
+.custom-calendar .react-calendar__tile--now:hover {
+    background: #ff4f4f !important;
+    transform: scale(1.08);
+}
+
+/* Highlight Event Days */
+.event-day {
+    background: #ffcc00 !important;
+    /* Yellow highlight */
+    color: black !important;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.15), inset -2px -2px 5px rgba(255, 255, 255, 0.6);
+}
+
+/* Hover Effect for Event Days */
+.event-day:hover {
+    background: #ffaa00 !important;
+    transform: scale(1.1);
+}

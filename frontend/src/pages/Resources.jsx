@@ -3,7 +3,6 @@ import { Box, Heading, Link, VStack, Text, Flex, Button, Icon } from '@chakra-ui
 import { FaStar } from 'react-icons/fa';
 
 const Resources = () => {
-  // Sample resource data with existing average ratings
   const allResources = [
     { id: 1, name: 'B.Sc. Nursing', courseCode: 'NURS101', university: 'ABC University', url: 'https://example.com/docs', rating: 4.2, totalRatings: 10 },
     { id: 2, name: 'B. Ed.', courseCode: 'EDU102', university: 'XYZ University', url: 'https://example.com/docs', rating: 3.8, totalRatings: 7 },
@@ -12,28 +11,21 @@ const Resources = () => {
     { id: 5, name: 'PhD in Education', courseCode: 'EDU303', university: 'XYZ University', url: 'https://example.com/docs3', rating: 3.5, totalRatings: 5 }
   ];
 
-  // State to track selected university
   const [selectedUniversity, setSelectedUniversity] = useState(null);
-  
-  // State to track user ratings (before submitting)
   const [userRatings, setUserRatings] = useState({});
 
-  // Filter resources based on selected university
   const filteredResources = selectedUniversity
     ? allResources.filter(resource => resource.university === selectedUniversity)
     : allResources;
 
-  // Handle rating click (before submission)
   const handleRatingClick = (resourceId, rating) => {
     setUserRatings(prev => ({ ...prev, [resourceId]: rating }));
   };
 
-  // Simulate rating submission (in a real app, this would send to an API)
   const handleSubmitRating = (resource) => {
     const userRating = userRatings[resource.id] || 0;
     if (userRating > 0) {
       alert(`Rating submitted: ${userRating} stars for ${resource.name}`);
-      // In a real app, this is where you'd send data to a backend
     }
   };
 
@@ -43,7 +35,6 @@ const Resources = () => {
         {selectedUniversity ? `${selectedUniversity} Resources` : "All Resources"}
       </Heading>
 
-      {/* Show "Back to All" Button if a university is selected */}
       {selectedUniversity && (
         <Button colorScheme="blue" size="sm" onClick={() => setSelectedUniversity(null)}>
           Show All Resources
@@ -63,7 +54,19 @@ const Resources = () => {
 
       {/* Table Content */}
       {filteredResources.map((resource) => (
-        <Box key={resource.id} p={3} borderWidth="1px" borderRadius="md">
+        <Box
+          key={resource.id}
+          p={3}
+          borderWidth="1px"
+          borderRadius="md"
+          bg="white"
+          transition="all 0.3s ease-in-out"
+          boxShadow="md"
+          _hover={{
+            transform: "scale(1.02)",
+            boxShadow: "xl",
+          }}
+        >
           <Flex justify="space-between" align="center">
             {/* Course Name */}
             <Text flex="2" textAlign="center" whiteSpace="nowrap" overflowWrap="break-word">
@@ -78,8 +81,15 @@ const Resources = () => {
             </Text>
 
             {/* University Name */}
-            <Text flex="1" textAlign="center" color="blue.500" cursor="pointer" whiteSpace="nowrap"
-              onClick={() => setSelectedUniversity(resource.university)}>
+            <Text
+              flex="1"
+              textAlign="center"
+              color="blue.500"
+              cursor="pointer"
+              whiteSpace="nowrap"
+              _hover={{ textDecoration: "underline" }}
+              onClick={() => setSelectedUniversity(resource.university)}
+            >
               {resource.university}
             </Text>
 
