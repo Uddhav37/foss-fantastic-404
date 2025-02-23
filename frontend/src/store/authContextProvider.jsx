@@ -1,5 +1,16 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { axiosInstance } from "../lib/axios";
+import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+// Create an axios instance
+const axiosInstance = axios.create({
+  baseURL: "API_BASE_URL", // Replace with your API's base URL
+  headers: {
+    "Content-Type": "application/json",
+    // Add any other headers your API requires
+  },
+  // You can add other configuration options here
+});
 
 // Create context
 const AuthContext = createContext();
@@ -48,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await axiosInstance.post("auth/login", { email, password });
       setAuthUser(res.data);
-      return res.data
+      return res.data;
     } catch (error) {
       console.error("Login failed:", error.message);
       throw error;
